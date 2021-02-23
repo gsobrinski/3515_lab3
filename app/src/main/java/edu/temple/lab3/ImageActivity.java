@@ -30,6 +30,7 @@ public class ImageActivity extends AppCompatActivity {
 
         // create ArrayList of names
         ArrayList cats = new ArrayList<String>();
+        //cats.add(0,"select a cat:");
         cats.add("peaceful cat");
         cats.add("very cute cat");
         cats.add("relaxing cat");
@@ -44,13 +45,13 @@ public class ImageActivity extends AppCompatActivity {
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(ImageActivity.this, "Item Selected", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(ImageActivity.this, "Item Selected", Toast.LENGTH_SHORT).show();
                 showPicture(position);
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-                Toast.makeText(ImageActivity.this, "Item Unselected", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(ImageActivity.this, "Item Unselected", Toast.LENGTH_SHORT).show();
             }
         });
 

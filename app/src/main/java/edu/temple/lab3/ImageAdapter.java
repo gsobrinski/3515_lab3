@@ -1,20 +1,9 @@
 package edu.temple.lab3;
 
+import android.widget.*;
+import android.view.*;
 import android.app.Activity;
 import android.content.Context;
-import android.media.Image;
-import android.util.Pair;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.BaseAdapter;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.Spinner;
-import android.widget.SpinnerAdapter;
-import android.widget.TextView;
-
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
@@ -25,6 +14,7 @@ public class ImageAdapter extends BaseAdapter implements SpinnerAdapter {
     Context context;
     ArrayList<String> names;
     int[] images;
+    boolean first;
 
     // constructor
     public ImageAdapter (Context context, ArrayList names, int[] images) {
@@ -32,6 +22,7 @@ public class ImageAdapter extends BaseAdapter implements SpinnerAdapter {
         this.context = context;
         this.names = names;
         this.images = images;
+        this.first = true;
     }
 
     @Override
@@ -52,13 +43,30 @@ public class ImageAdapter extends BaseAdapter implements SpinnerAdapter {
     // getView is what shows on the Spinner before the user clicks it
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-
-        LinearLayout linear;
-
         TextView nameText;
 
+//        // if there is no view to reuse
+//        if (convertView == null) {
+//            // create new layout and set it to vertical orientation
+//            linear = new LinearLayout(context);
+//            linear.setOrientation(LinearLayout.VERTICAL);
+//
+//            nameText = new TextView(context);
+//
+//            // attach the view to the layout as a child
+//            linear.addView(nameText);
+//
+//        } else {
+//            linear = (LinearLayout) convertView;
+//            nameText = (TextView) linear.getChildAt(0);
+//        }
+
         nameText = new TextView(context);
-        nameText.setText("Select a cat:");
+        if (first) {
+            nameText.setText("select a cat:");
+        } else {
+            nameText.setText(names.get(position));
+        }
 
         return nameText;
     }
@@ -66,6 +74,7 @@ public class ImageAdapter extends BaseAdapter implements SpinnerAdapter {
     // getDropDownView is the list of dropdown options
     @Override
     public View getDropDownView(int position, View convertView, ViewGroup parent) {
+        first = false;
         LinearLayout linear;
         TextView name;
         ImageView image;
