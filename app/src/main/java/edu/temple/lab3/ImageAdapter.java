@@ -1,10 +1,14 @@
 package edu.temple.lab3;
 
+import android.app.Activity;
 import android.content.Context;
+import android.media.Image;
 import android.util.Pair;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.SpinnerAdapter;
@@ -20,11 +24,14 @@ public class ImageAdapter extends BaseAdapter implements SpinnerAdapter {
 
     Context context;
     ArrayList<String> names;
+    int[] images;
 
     // constructor
-    public ImageAdapter (Context context, ArrayList names) {
+    public ImageAdapter (Context context, ArrayList names, int[] images) {
+
         this.context = context;
         this.names = names;
+        this.images = images;
     }
 
     @Override
@@ -42,6 +49,7 @@ public class ImageAdapter extends BaseAdapter implements SpinnerAdapter {
         return position;
     }
 
+    // getView is what shows on the Spinner before the user clicks it
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
 
@@ -49,29 +57,32 @@ public class ImageAdapter extends BaseAdapter implements SpinnerAdapter {
 
         TextView nameText;
 
-        // if there is no view to reuse
-        if (convertView == null) {
-            // create new layout and set it to vertical orientation
-            linear = new LinearLayout(context);
-            linear.setOrientation(LinearLayout.VERTICAL);
+        nameText = new TextView(context);
+        nameText.setText("Select a cat:");
 
-            nameText = new TextView(context);
-
-            // attach the view to the layout as a child
-            linear.addView(nameText);
-
-        } else {
-            linear = (LinearLayout) convertView;
-            nameText = (TextView) linear.getChildAt(0);
-        }
-
-        nameText.setText(names.get(position));
-
-        return linear;
+        return nameText;
     }
 
+    // getDropDownView is the list of dropdown options
     @Override
     public View getDropDownView(int position, View convertView, ViewGroup parent) {
-        return null;
+        LinearLayout linear;
+        TextView name;
+        ImageView image;
+
+
+        // custom layout
+        LayoutInflater inflater = (LayoutInflater) context.getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
+        View view = inflater.inflate(R.layout.spinner_layout, null);
+
+        name = (TextView) view.findViewById(R.id.text);
+        image = (ImageView) view.findViewById(R.id.image);
+
+        name.setText(names.get(position));
+        image.setImageResource(images[position]);
+
+        return view;
+
     }
+
 }
