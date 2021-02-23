@@ -67,7 +67,7 @@ public class ImageAdapter extends BaseAdapter implements SpinnerAdapter {
         } else {
             nameText.setText(names.get(position));
         }
-
+        nameText.setGravity(Gravity.CENTER);
         return nameText;
     }
 
