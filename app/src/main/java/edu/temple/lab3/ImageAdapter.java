@@ -45,22 +45,6 @@ public class ImageAdapter extends BaseAdapter implements SpinnerAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         TextView nameText;
 
-//        // if there is no view to reuse
-//        if (convertView == null) {
-//            // create new layout and set it to vertical orientation
-//            linear = new LinearLayout(context);
-//            linear.setOrientation(LinearLayout.VERTICAL);
-//
-//            nameText = new TextView(context);
-//
-//            // attach the view to the layout as a child
-//            linear.addView(nameText);
-//
-//        } else {
-//            linear = (LinearLayout) convertView;
-//            nameText = (TextView) linear.getChildAt(0);
-//        }
-
         nameText = new TextView(context);
         if (first) {
             nameText.setText("select a cat:");
@@ -75,7 +59,6 @@ public class ImageAdapter extends BaseAdapter implements SpinnerAdapter {
     @Override
     public View getDropDownView(int position, View convertView, ViewGroup parent) {
         first = false;
-        LinearLayout linear;
         TextView name;
         ImageView image;
 

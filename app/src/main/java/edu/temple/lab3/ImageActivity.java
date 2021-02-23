@@ -18,6 +18,7 @@ public class ImageActivity extends AppCompatActivity {
 
     Spinner spinner;
     ImageView imageView;
+    boolean isFirst = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,7 +31,6 @@ public class ImageActivity extends AppCompatActivity {
 
         // create ArrayList of names
         ArrayList cats = new ArrayList<String>();
-        //cats.add(0,"select a cat:");
         cats.add("peaceful cat");
         cats.add("very cute cat");
         cats.add("relaxing cat");
@@ -42,11 +42,16 @@ public class ImageActivity extends AppCompatActivity {
         ImageAdapter adapter = new ImageAdapter(this, cats, catImages);
         spinner.setAdapter(adapter);
 
+        // create spinner listener
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 //Toast.makeText(ImageActivity.this, "Item Selected", Toast.LENGTH_SHORT).show();
-                showPicture(position);
+                if (isFirst) {
+                    isFirst = false;
+                } else {
+                    showPicture(position);
+                }
             }
 
             @Override
